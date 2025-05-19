@@ -7,6 +7,13 @@ spring:
       - security-config.yml
       - optional:file:.env[.properties]
 
+livekit:
+  api:
+    key: ${LIVEKIT_API_KEY}
+    secret: ${LIVEKIT_API_SECRET}
+  server:
+    url: ${LIVEKIT_SERVER_URL}
+
 ---
 spring:
   config:
