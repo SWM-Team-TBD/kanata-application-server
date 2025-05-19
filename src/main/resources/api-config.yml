@@ -1,0 +1,26 @@
+server:
+  port: ${PORT}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: main
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
