@@ -39,8 +39,6 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
 
         final Member member = updateOrWrite(email, memberInfo);
 
-        log.debug("로그인 성공: {}", member.getEmail());
-
         return new KanataUser(member, oAuth2UserAttributes, userNameAttributeName);
     }
 

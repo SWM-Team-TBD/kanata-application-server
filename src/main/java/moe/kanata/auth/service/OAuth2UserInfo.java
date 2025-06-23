@@ -1,8 +1,7 @@
 package moe.kanata.auth.service;
 
 import lombok.Builder;
-import moe.kanata.global.exception.KanataException;
-import org.springframework.http.HttpStatus;
+import moe.kanata.global.exception.HttpResponseException;
 
 import java.util.Map;
 
@@ -20,8 +19,7 @@ public record OAuth2UserInfo(
         return switch (registrationId) {
             case "google" -> ofGoogle(attributes);
             case "kakao" -> ofKakao(attributes);
-            default -> throw new KanataException(
-                HttpStatus.BAD_REQUEST,
+            default -> throw HttpResponseException.badRequest(
                 "Unsupported OAuth2 provider: " + registrationId
             );
         };

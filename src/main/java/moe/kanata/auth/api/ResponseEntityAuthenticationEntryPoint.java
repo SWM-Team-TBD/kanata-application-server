@@ -24,9 +24,9 @@ public class ResponseEntityAuthenticationEntryPoint implements AuthenticationEnt
 
     @Override
     public void commence(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        AuthenticationException authException
+        final HttpServletRequest request,
+        final HttpServletResponse response,
+        final AuthenticationException authException
     ) throws IOException {
         final HttpStatus status = HttpStatus.UNAUTHORIZED;
         final String message = "로그인이 필요합니다.";
@@ -43,9 +43,11 @@ public class ResponseEntityAuthenticationEntryPoint implements AuthenticationEnt
             response.addHeader(key, headerValue);
         });
 
-        try (final OutputStreamWriter writer = new OutputStreamWriter(
-            response.getOutputStream(),
-            StandardCharsets.UTF_8)
+        try (
+            final OutputStreamWriter writer = new OutputStreamWriter(
+                response.getOutputStream(),
+                StandardCharsets.UTF_8
+            )
         ) {
             objectMapper.writeValue(writer, responseEntity.getBody());
         }

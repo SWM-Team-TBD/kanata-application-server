@@ -3,6 +3,7 @@ package moe.kanata.auth.api;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import moe.kanata.auth.service.AccessTokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 import static moe.kanata.auth.api.AuthorizationRequestRedirectResolver.REDIRECT_PARAM_KEY;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -38,6 +40,8 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
             .queryParam(ACCESS_TOKEN_PARAM_KEY, accessToken)
             .build()
             .toUriString();
+
+        log.debug("로그인 성공: {}, 엑세스 토큰: {}", authentication.getName(), accessToken);
 
         response.sendRedirect(redirectWithAccessToken);
     }

@@ -51,6 +51,7 @@ public class AccessTokenService {
             .expiration(Date.from(expired.toInstant()))
             .issuedAt(Date.from(now.toInstant()))
             .issuer("kanata-application-server")
+            .signWith(key)
             .compact();
     }
 
